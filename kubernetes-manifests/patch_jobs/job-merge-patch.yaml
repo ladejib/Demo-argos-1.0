@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: merge-reports
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: merge
+        image: mcr.microsoft.com/playwright:v1.52.0-noble
+        command: ["/bin/sh", "-c"]
+        args:
+          - |
+            #npx playwright merge-reports /results/*/*/test-results.json --reporter html;
+            npx playwright merge-reports /results/${RUN_ID}/*/report.json --reporter html
+            cp -r playwright-report /results/${RUN_ID}/final
+            sleep 30000
+        env:
+        - name: RUN_ID
+          value: __RUN_ID__
+        volumeMounts:
+        - name: results
+          mountPath: /results
+      volumes:
+      - name: results
+        persistentVolumeClaim:
+          claimName: results-pvc

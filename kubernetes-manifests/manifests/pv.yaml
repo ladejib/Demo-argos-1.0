@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: results-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce  # Must match PVC's access mode
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: ""  # Explicitly empty to disable StorageClass
+  hostPath:
+    path: /tmp/playwright-results  # Your local directory
+    type: DirectoryOrCreate
+  claimRef:  # Pre-bind to your PVC
+    name: results-pvc
+    namespace: playwright

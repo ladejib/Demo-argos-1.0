@@ -1,0 +1,14 @@
+# results-pvc.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: results-pvc
+  namespace: playwright
+spec:
+  accessModes:
+    - ReadWriteOnce  # Must match PV
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: ""  # Disable dynamic provisioning
+  volumeName: results-pv  # Force binding to your PV

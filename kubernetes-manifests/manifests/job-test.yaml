@@ -1,0 +1,36 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: playwright-test
+  namespace: playwright
+spec:
+  completions: 4
+  parallelism: 4
+  completionMode: Indexed
+  template:
+    spec:
+      containers:
+      - name: playwright
+        image: saifb/playwright-test:0.0.1
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: JOB_COMPLETION_INDEX
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.annotations['batch.kubernetes.io/job-completion-index']
+        - name: TOTAL_SHARDS
+          value: "4"
+        - name: ENVIRONMENT
+          value: "stage" # Can be overridden to dev/stage/preprod
+        - name: BASE_URL
+          value: "https://playwright.dev"
+        - name: RUN_ID
+          value: run-1746046534
+        volumeMounts:
+        - name: local-results
+          mountPath: /results
+      restartPolicy: Never
+      volumes:
+      - name: local-results
+        persistentVolumeClaim:
+          claimName: results-pvc

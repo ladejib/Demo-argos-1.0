@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-report-viewer
+  labels:
+    app: nginx-report-viewer
+spec:
+  containers:
+  - name: nginx-report-viewer
+    image: nginx:1.25
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - name: results-volume
+      mountPath: /usr/share/nginx/html
+    - name: nginx-config
+      mountPath: /etc/nginx/conf.d/default.conf
+      subPath: default.conf
+  volumes:
+  - name: results-volume
+    persistentVolumeClaim:
+      claimName: results-pvc
+  - name: nginx-config
+    configMap:
+      name: nginx-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-report-viewer
+spec:
+  selector:
+    app: nginx-report-viewer
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP
