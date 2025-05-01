@@ -3,8 +3,9 @@ kind: Job
 metadata:
   name: merge-reports
   namespace: playwright
-  labels:
-    RUNID: __RUN_ID__
+  annotations: # This should help recreate the job
+    "argocd.argoproj.io/hook": PreSync
+    "argocd.argoproj.io/hook-delete-policy": HookSucceeded
 
 spec:
   template:
