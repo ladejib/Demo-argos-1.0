@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: playwright-test
+  name: playwright-test__RUN_ID__
   namespace: playwright
   annotations:
     "argocd.argoproj.io/hook": PreSync # This should help recreate the job
