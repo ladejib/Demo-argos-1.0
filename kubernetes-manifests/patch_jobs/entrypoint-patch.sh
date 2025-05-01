@@ -1,0 +1,30 @@
+#!/bin/bash
+set -e
+
+cd /app
+
+echo "[Entry Point] Started ..."
+
+ENV_FILE=".env.${ENVIRONMENT}"
+echo "[Entry Point] : $ENV_FILE"
+
+if [ -f "$ENV_FILE" ]; then
+  echo "[Entry Point] Loading environment from $ENV_FILE"
+  export $(grep -v '^#' "$ENV_FILE" | xargs)
+else
+  echo "[Entry Point] No environment file found for $ENVIRONMENT. Defaulting to .env.dev"
+  export $(grep -v '^#' .env.dev | xargs)
+fi
+
+SHARD_CURRENT=$((JOB_COMPLETION_INDEX + 1))
+
+echo "[Entry Point] Running tests on shard ${SHARD_CURRENT}/${TOTAL_SHARDS}..."
+
+npx playwright test --shard=${SHARD_CURRENT}/${TOTAL_SHARDS}
+
+echo "[Entry Point] Writing to /results/${SHARD_CURRENT}/"
+mkdir -p /results/${__RUN_ID__}/${SHARD_CURRENT}
+cp -r playwright-report/* /results/${__RUN_ID__}/${SHARD_CURRENT}/
+echo "[Entry Point] Completed ..."
+
+sleep 300000

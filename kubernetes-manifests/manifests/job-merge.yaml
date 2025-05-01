@@ -4,7 +4,7 @@ metadata:
   name: merge-reports
   namespace: playwright
   labels:
-    RUNID: run-1746112294
+    RUNID: run-1746114834
 
 spec:
   template:
@@ -22,7 +22,7 @@ spec:
             sleep 30000
         env:
         - name: RUN_ID
-          value: run-1746112294
+          value: run-1746114834
         volumeMounts:
         - name: results
           mountPath: /results
