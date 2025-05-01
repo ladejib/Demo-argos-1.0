@@ -3,6 +3,8 @@ kind: Job
 metadata:
   name: playwright-test
   namespace: playwright
+  labels:
+    RUNID: run-1746112294
 spec:
   completions: 4
   parallelism: 4
@@ -25,7 +27,7 @@ spec:
         - name: BASE_URL
           value: "https://playwright.dev"
         - name: RUN_ID
-          value: run-1746110371
+          value: run-1746112294
         volumeMounts:
         - name: local-results
           mountPath: /results

@@ -2,6 +2,10 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: merge-reports
+  namespace: playwright
+  labels:
+    RUNID: run-1746112294
+
 spec:
   template:
     spec:
@@ -18,7 +22,7 @@ spec:
             sleep 30000
         env:
         - name: RUN_ID
-          value: run-1746110371
+          value: run-1746112294
         volumeMounts:
         - name: results
           mountPath: /results

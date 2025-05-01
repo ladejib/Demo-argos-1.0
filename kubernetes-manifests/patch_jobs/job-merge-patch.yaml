@@ -2,6 +2,10 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: merge-reports
+  namespace: playwright
+  labels:
+    RUNID: __RUN_ID__
+
 spec:
   template:
     spec:
