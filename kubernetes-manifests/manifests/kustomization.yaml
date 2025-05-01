@@ -1,0 +1,7 @@
+resources:
+  - pv.yaml
+  - pvc.yaml
+  - job-test.yaml
+  - job-merge.yaml
+  - nginx-config.yaml
+  - nginx-report-viewer.yaml

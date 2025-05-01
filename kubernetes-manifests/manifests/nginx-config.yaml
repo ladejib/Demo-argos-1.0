@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+data:
+  default.conf: |
+    server {
+        listen 80;
+        server_name localhost;
+
+        location / {
+            autoindex on;
+            root /usr/share/nginx/html;
+        }
+
+        location ~* \.json$ {
+            add_header Content-Type application/json;
+        }
+    }

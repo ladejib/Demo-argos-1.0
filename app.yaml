@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: playwright_testing
+  name: playwrighttesting
   namespace: argocd
 spec:
   project: default
