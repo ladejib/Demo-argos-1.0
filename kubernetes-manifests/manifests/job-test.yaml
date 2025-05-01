@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: playwright
-        image: saifb/playwright-test:0.0.1
+        image: saifb/playwright-test:0.0.2
         imagePullPolicy: IfNotPresent
         env:
         - name: JOB_COMPLETION_INDEX
