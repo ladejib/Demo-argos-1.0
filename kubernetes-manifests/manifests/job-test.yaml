@@ -25,7 +25,7 @@ spec:
         - name: BASE_URL
           value: "https://playwright.dev"
         - name: RUN_ID
-          value: run-1746046534
+          value: run-1746110371
         volumeMounts:
         - name: local-results
           mountPath: /results
