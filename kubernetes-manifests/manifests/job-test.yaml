@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: playwright-testrun-1746118336
+  name: playwright-testrun-1746131510
   namespace: playwright
   annotations:
     "argocd.argoproj.io/hook": PreSync # This should help recreate the job
@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: playwright
-        image: saifb/playwright-test:0.0.1
+        image: saifb/playwright-test:0.0.2
         imagePullPolicy: IfNotPresent
         env:
         - name: JOB_COMPLETION_INDEX
@@ -28,7 +28,7 @@ spec:
         - name: BASE_URL
           value: "https://playwright.dev"
         - name: RUN_ID
-          value: run-1746118336
+          value: run-1746131510
         volumeMounts:
         - name: local-results
           mountPath: /results
