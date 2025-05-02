@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: playwright-test-run-1746206650
+  name: playwright-test-run-1746212089
   namespace: playwright
   # annotations:
   #   "argocd.argoproj.io/hook": PreSync # This should help recreate the job
@@ -10,6 +10,7 @@ spec:
   completions: 4
   parallelism: 4
   completionMode: Indexed
+  ttlSecondsAfterFinished: 300  # Keep the Job object for 5 minutes (300 seconds) after completion
   template:
     spec:
       containers:
@@ -29,7 +30,7 @@ spec:
         - name: BASE_URL
           value: "https://playwright.dev"
         - name: RUN_ID
-          value: -run-1746206650
+          value: run-1746212089
         volumeMounts:
         - name: local-results
           mountPath: /results
