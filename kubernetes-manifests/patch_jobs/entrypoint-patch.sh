@@ -22,9 +22,9 @@ echo "[Entry Point] Running tests on shard ${SHARD_CURRENT}/${TOTAL_SHARDS}..."
 
 npx playwright test --shard=${SHARD_CURRENT}/${TOTAL_SHARDS}
 
-echo "[Entry Point] Writing to /results/${SHARD_CURRENT}/"
-mkdir -p /results/${__RUN_ID__}/${SHARD_CURRENT}
-cp -r playwright-report/* /results/${__RUN_ID__}/${SHARD_CURRENT}/
+echo "[Entry Point] Writing to /results/__RUN_ID__/${SHARD_CURRENT}/"
+mkdir -p /results/__RUN_ID__/${SHARD_CURRENT}
+cp -r playwright-report/* /results/__RUN_ID__/${SHARD_CURRENT}/
 echo "[Entry Point] Completed ..."
 
-sleep 300000
+sleep 3000

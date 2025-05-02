@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: merge-reportsrun-1746131510
+  name: merge-reportsrun-1746150026
   namespace: playwright
   annotations: # This should help recreate the job
     "argocd.argoproj.io/hook": PreSync
@@ -20,10 +20,10 @@ spec:
             #npx playwright merge-reports /results/*/*/test-results.json --reporter html;
             npx playwright merge-reports /results/${RUN_ID}/*/report.json --reporter html
             cp -r playwright-report /results/${RUN_ID}/final
-            sleep 30000
+            sleep 300
         env:
         - name: RUN_ID
-          value: run-1746131510
+          value: run-1746150026
         volumeMounts:
         - name: results
           mountPath: /results
