@@ -1,11 +1,11 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: playwright-test__RUN_ID__
+  name: playwright-test-__RUN_ID__
   namespace: playwright
-  annotations:
-    "argocd.argoproj.io/hook": PreSync # This should help recreate the job
-    "argocd.argoproj.io/hook-delete-policy": HookSucceeded
+  # annotations:
+  #   "argocd.argoproj.io/hook": PreSync # This should help recreate the job
+  #   "argocd.argoproj.io/hook-delete-policy": HookSucceeded
 spec:
   completions: 4
   parallelism: 4

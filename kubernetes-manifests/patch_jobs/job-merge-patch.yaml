@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: merge-reports__RUN_ID__
+  name: playwright-merge-reports-__RUN_ID__
   namespace: playwright
   annotations: # This should help recreate the job
     "argocd.argoproj.io/hook": PreSync

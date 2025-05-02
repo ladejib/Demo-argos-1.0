@@ -3,9 +3,9 @@ kind: Job
 metadata:
   name: playwright-testrun-1746150026
   namespace: playwright
-  annotations:
-    "argocd.argoproj.io/hook": PreSync # This should help recreate the job
-    "argocd.argoproj.io/hook-delete-policy": HookSucceeded
+  # annotations:
+  #   "argocd.argoproj.io/hook": PreSync # This should help recreate the job
+  #   "argocd.argoproj.io/hook-delete-policy": HookSucceeded
 spec:
   completions: 4
   parallelism: 4
