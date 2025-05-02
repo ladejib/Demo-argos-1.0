@@ -5,3 +5,4 @@ resources:
   - job-merge.yaml
   - nginx-config.yaml
   - nginx-report-viewer.yaml
+  - entrypoint-configmap.yaml
