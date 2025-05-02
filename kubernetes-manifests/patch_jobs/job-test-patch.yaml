@@ -16,6 +16,7 @@ spec:
       - name: playwright
         image: saifb/playwright-test:0.0.2
         imagePullPolicy: IfNotPresent
+        command: ["/bin/bash", "/config/entrypoint.sh"]
         env:
         - name: JOB_COMPLETION_INDEX
           valueFrom:
@@ -28,12 +29,17 @@ spec:
         - name: BASE_URL
           value: "https://playwright.dev"
         - name: RUN_ID
-          value: __RUN_ID__
+          value: -__RUN_ID__
         volumeMounts:
         - name: local-results
           mountPath: /results
+        - name: entrypoint-volume
+          mountPath: /config
       restartPolicy: Never
       volumes:
+      - name: entrypoint-volume
+        configMap:
+          name: playwright-entrypoint
       - name: local-results
         persistentVolumeClaim:
           claimName: results-pvc

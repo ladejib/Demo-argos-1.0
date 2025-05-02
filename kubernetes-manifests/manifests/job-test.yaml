@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: playwright-testrun-1746150026
+  name: playwright-test-run-1746206650
   namespace: playwright
   # annotations:
   #   "argocd.argoproj.io/hook": PreSync # This should help recreate the job
@@ -16,6 +16,7 @@ spec:
       - name: playwright
         image: saifb/playwright-test:0.0.2
         imagePullPolicy: IfNotPresent
+        command: ["/bin/bash", "/config/entrypoint.sh"]
         env:
         - name: JOB_COMPLETION_INDEX
           valueFrom:
@@ -28,12 +29,17 @@ spec:
         - name: BASE_URL
           value: "https://playwright.dev"
         - name: RUN_ID
-          value: run-1746150026
+          value: -run-1746206650
         volumeMounts:
         - name: local-results
           mountPath: /results
+        - name: entrypoint-volume
+          mountPath: /config
       restartPolicy: Never
       volumes:
+      - name: entrypoint-volume
+        configMap:
+          name: playwright-entrypoint
       - name: local-results
         persistentVolumeClaim:
           claimName: results-pvc

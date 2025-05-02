@@ -1,11 +1,11 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: merge-reportsrun-1746150026
+  name: playwright-merge-reports-run-1746206650
   namespace: playwright
-  annotations: # This should help recreate the job
-    "argocd.argoproj.io/hook": PreSync
-    "argocd.argoproj.io/hook-delete-policy": HookSucceeded
+  # annotations: # This should help recreate the job
+  #   "argocd.argoproj.io/hook": PreSync
+  #   "argocd.argoproj.io/hook-delete-policy": HookSucceeded
 
 spec:
   template:
@@ -23,7 +23,7 @@ spec:
             sleep 300
         env:
         - name: RUN_ID
-          value: run-1746150026
+          value: run-1746206650
         volumeMounts:
         - name: results
           mountPath: /results
