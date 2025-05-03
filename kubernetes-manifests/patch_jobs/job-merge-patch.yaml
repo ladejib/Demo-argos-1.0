@@ -21,10 +21,36 @@ spec:
         command: ["/bin/sh", "-c"]
         args:
           - |
-            # npx playwright merge-reports /results/${RUN_ID}/*/test-results.json --reporter html;
-            npx playwright merge-reports /results/${RUN_ID}/*/ --reporter html;
-            cp -r playwright-report /results/${RUN_ID}/final
-            sleep 300
+            set -e
+            echo "[Merge Job] Waiting for test results to be available..."
+
+            MAX_WAIT=300
+            WAIT_INTERVAL=10
+            WAITED=0
+
+            while true; do
+              COUNT=$(ls -d /results/${RUN_ID}/*/ 2>/dev/null | wc -l)
+              if [ "$COUNT" -ge "$EXPECTED_SHARDS" ]; then
+                echo "[Merge Job] Found $COUNT result directories."
+                break
+              fi
+
+              if [ "$WAITED" -ge "$MAX_WAIT" ]; then
+                echo "[Merge Job] Timeout waiting for result directories."
+                exit 1
+              fi
+
+              echo "[Merge Job] Waiting... ($WAITED/$MAX_WAIT seconds)"
+              sleep $WAIT_INTERVAL
+              WAITED=$((WAITED + WAIT_INTERVAL))
+            done
+
+            echo "[Merge Job] Merging reports..."
+            npx playwright merge-reports /results/${RUN_ID}/*/ --reporter html
+            mkdir -p /results/${RUN_ID}/final
+            cp -r playwright-report/* /results/${RUN_ID}/final/
+            echo "[Merge Job] Merge complete."
+
         env:
         - name: RUN_ID
           value: __RUN_ID__
