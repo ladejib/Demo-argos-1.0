@@ -59,6 +59,17 @@ Make
 Open an issue or contact maintainers for questions.
 
 
-
-
+kubectl port-forward svc/argocd-server -n argocd 8443:443
+127.0.0.1:8443
 http://localhost:30080/
+
+. Temporary Workaround: Use NodePort
+Expose ArgoCD via NodePort:
+
+sh
+kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "NodePort"}}'
+Get the assigned port:
+
+sh
+kubectl get svc -n argocd
+Access it at https://localhost:<NodePort>.

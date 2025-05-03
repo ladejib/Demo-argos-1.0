@@ -10,7 +10,7 @@ spec:
   completions: 4
   parallelism: 4
   completionMode: Indexed
-  ttlSecondsAfterFinished: 300  # Keep the Job object for 5 minutes (300 seconds) after completion
+  ttlSecondsAfterFinished: 60  # Keep the Job object for 1 minutes (60 seconds) after completion
   template:
     spec:
       containers:

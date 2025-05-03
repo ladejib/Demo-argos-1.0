@@ -34,5 +34,5 @@ data:
     cp -r playwright-report/* /results/__RUN_ID__/${SHARD_CURRENT}/
     echo "[Entry Point] Completed ..."
 
-    sleep 3000
+    sleep 120
 
