@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: playwright-merge-reports-run-1746212089
+  name: playwright-merge-reports-run-1746281643
   namespace: playwright
   # annotations: # This should help recreate the job
   #   "argocd.argoproj.io/hook": PreSync
@@ -24,7 +24,7 @@ spec:
             sleep 300
         env:
         - name: RUN_ID
-          value: run-1746212089
+          value: run-1746281643
         volumeMounts:
         - name: results
           mountPath: /results
