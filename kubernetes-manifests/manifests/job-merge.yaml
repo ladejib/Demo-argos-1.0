@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: playwright-merge-reports-run-1746288521
+  name: playwright-merge-reports-run-1746289840
   namespace: playwright
   annotations:
     "argocd.argoproj.io/hook": PostSync
@@ -27,7 +27,7 @@ spec:
             sleep 300
         env:
         - name: RUN_ID
-          value: run-1746288521
+          value: run-1746289840
         volumeMounts:
         - name: results
           mountPath: /results

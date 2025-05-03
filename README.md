@@ -1,25 +1,6 @@
-# Playwright Test Runner Infrastructure with ArgoCD & Report Viewer
+# Playwright Test Runner with ArgoCD & Report Viewer on Kubernetes 
 
 This repository sets up an automated test execution environment using Playwright and Kubernetes, integrated with ArgoCD for GitOps-style deployment. The environment includes persistent storage for test reports and an NGINX-based report viewer accessible via NodePort.
-
-## Directory Structure
-├── README.md
-├── app.yaml
-└── kubernetes-manifests    
-├── manifests
-│   ├── job-merge.yaml
-│   ├── job-test.yaml
-│   ├── kustomization.yaml
-│   ├── nginx-config.yaml
-│   ├── nginx-report-viewer.yaml
-│   ├── pv.yaml
-|   └── pvc.yaml
-└── patch_jobs
-    |   ├── entrypoint-patch.sh
-    |   ├── job-merge-patch.yaml
-    |   ├── job-test-patch.yaml
-    |   └── launch-local-run.sh 
-
 ## Key Components
 
 ### ArgoCD: 
@@ -74,37 +55,4 @@ Get the assigned port:
 sh
 kubectl get svc -n argocd
 Access it at https://localhost:<NodePort>.
-
-### Issues with argocd crashing
-
-kubectl patch deployment argocd-server -n argocd --type='json' -p='[
-  {
-    "op": "replace",
-    "path": "/spec/template/spec/containers/0/livenessProbe",
-    "value": {
-      "httpGet": {
-        "path": "/healthz?full=true",
-        "port": 8080
-      },
-      "initialDelaySeconds": 30,
-      "periodSeconds": 20,
-      "timeoutSeconds": 10,
-      "failureThreshold": 5
-    }
-  },
-  {
-    "op": "replace",
-    "path": "/spec/template/spec/containers/0/readinessProbe",
-    "value": {
-      "httpGet": {
-        "path": "/healthz",
-        "port": 8080
-      },
-      "initialDelaySeconds": 15,
-      "periodSeconds": 10,
-      "timeoutSeconds": 5,
-      "failureThreshold": 5
-    }
-  }
-]'
 
