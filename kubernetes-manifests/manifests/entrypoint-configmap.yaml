@@ -29,9 +29,9 @@ data:
 
     npx playwright test --shard=${SHARD_CURRENT}/${TOTAL_SHARDS}
 
-    echo "[Entry Point] Writing to /results/run-1746283174/${SHARD_CURRENT}/"
-    mkdir -p /results/run-1746283174/${SHARD_CURRENT}
-    cp -r playwright-report/* /results/run-1746283174/${SHARD_CURRENT}/
+    echo "[Entry Point] Writing to /results/run-1746288521/${SHARD_CURRENT}/"
+    mkdir -p /results/run-1746288521/${SHARD_CURRENT}
+    cp -r playwright-report/* /results/run-1746288521/${SHARD_CURRENT}/
     echo "[Entry Point] Completed ..."
 
     sleep 120

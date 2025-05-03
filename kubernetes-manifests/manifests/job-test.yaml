@@ -1,14 +1,17 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: playwright-test-run-1746283174
+  name: playwright-test-run-1746288521
   namespace: playwright
+  annotations:
+    "argocd.argoproj.io/hook": PostSync
+    "argocd.argoproj.io/hook-delete-policy": HookSucceeded
   # annotations:
   #   "argocd.argoproj.io/hook": PreSync # This should help recreate the job
   #   "argocd.argoproj.io/hook-delete-policy": HookSucceeded
 spec:
-  completions: 4
-  parallelism: 4
+  completions: 3
+  parallelism: 3
   completionMode: Indexed
   ttlSecondsAfterFinished: 60  # Keep the Job object for 1 minutes (60 seconds) after completion
   template:
@@ -24,13 +27,13 @@ spec:
             fieldRef:
               fieldPath: metadata.annotations['batch.kubernetes.io/job-completion-index']
         - name: TOTAL_SHARDS
-          value: "4"
+          value: "3"
         - name: ENVIRONMENT
           value: "stage" # Can be overridden to dev/stage/preprod
         - name: BASE_URL
           value: "https://playwright.dev"
         - name: RUN_ID
-          value: run-1746283174
+          value: run-1746288521
         volumeMounts:
         - name: local-results
           mountPath: /results
