@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: playwright-test-run-1746291864
+  name: playwright-test-run-1746292844
   namespace: playwright
   annotations:
     "argocd.argoproj.io/hook": PostSync
@@ -33,7 +33,7 @@ spec:
         - name: BASE_URL
           value: "https://playwright.dev"
         - name: RUN_ID
-          value: run-1746291864
+          value: run-1746292844
         volumeMounts:
         - name: local-results
           mountPath: /results

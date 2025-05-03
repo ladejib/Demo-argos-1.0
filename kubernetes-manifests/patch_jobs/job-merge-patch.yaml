@@ -54,6 +54,8 @@ spec:
         env:
         - name: RUN_ID
           value: __RUN_ID__
+        - name: EXPECTED_SHARDS
+          value: "3"  # Adjust this to match your test job parallelism/shard count
         volumeMounts:
         - name: results
           mountPath: /results

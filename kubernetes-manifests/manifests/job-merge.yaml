@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: playwright-merge-reports-run-1746291864
+  name: playwright-merge-reports-run-1746292844
   namespace: playwright
   annotations:
     "argocd.argoproj.io/hook": PostSync
@@ -53,7 +53,9 @@ spec:
 
         env:
         - name: RUN_ID
-          value: run-1746291864
+          value: run-1746292844
+        - name: EXPECTED_SHARDS
+          value: "3"  # Adjust this to match your test job parallelism/shard count
         volumeMounts:
         - name: results
           mountPath: /results
