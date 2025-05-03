@@ -21,8 +21,8 @@ spec:
         command: ["/bin/sh", "-c"]
         args:
           - |
-            #npx playwright merge-reports /results/*/*/test-results.json --reporter html;
-            npx playwright merge-reports /results/${RUN_ID}/*/report.json --reporter html
+            # npx playwright merge-reports /results/${RUN_ID}/*/test-results.json --reporter html;
+            npx playwright merge-reports /results/${RUN_ID}/*/ --reporter html;
             cp -r playwright-report /results/${RUN_ID}/final
             sleep 300
         env:

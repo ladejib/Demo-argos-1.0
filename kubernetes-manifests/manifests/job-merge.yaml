@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: playwright-merge-reports-run-1746289840
+  name: playwright-merge-reports-run-1746290742
   namespace: playwright
   annotations:
     "argocd.argoproj.io/hook": PostSync
@@ -21,13 +21,13 @@ spec:
         command: ["/bin/sh", "-c"]
         args:
           - |
-            #npx playwright merge-reports /results/*/*/test-results.json --reporter html;
-            npx playwright merge-reports /results/${RUN_ID}/*/report.json --reporter html
+            # npx playwright merge-reports /results/${RUN_ID}/*/test-results.json --reporter html;
+            npx playwright merge-reports /results/${RUN_ID}/*/ --reporter html;
             cp -r playwright-report /results/${RUN_ID}/final
             sleep 300
         env:
         - name: RUN_ID
-          value: run-1746289840
+          value: run-1746290742
         volumeMounts:
         - name: results
           mountPath: /results
