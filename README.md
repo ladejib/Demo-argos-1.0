@@ -59,6 +59,7 @@ Make
 Open an issue or contact maintainers for questions.
 
 
+### issue with portforwarding 
 kubectl port-forward svc/argocd-server -n argocd 8443:443
 127.0.0.1:8443
 http://localhost:30080/
@@ -73,3 +74,37 @@ Get the assigned port:
 sh
 kubectl get svc -n argocd
 Access it at https://localhost:<NodePort>.
+
+### Issues with argocd crashing
+
+kubectl patch deployment argocd-server -n argocd --type='json' -p='[
+  {
+    "op": "replace",
+    "path": "/spec/template/spec/containers/0/livenessProbe",
+    "value": {
+      "httpGet": {
+        "path": "/healthz?full=true",
+        "port": 8080
+      },
+      "initialDelaySeconds": 30,
+      "periodSeconds": 20,
+      "timeoutSeconds": 10,
+      "failureThreshold": 5
+    }
+  },
+  {
+    "op": "replace",
+    "path": "/spec/template/spec/containers/0/readinessProbe",
+    "value": {
+      "httpGet": {
+        "path": "/healthz",
+        "port": 8080
+      },
+      "initialDelaySeconds": 15,
+      "periodSeconds": 10,
+      "timeoutSeconds": 5,
+      "failureThreshold": 5
+    }
+  }
+]'
+
