@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: playwright-merge-reports-run-1746370926
+  name: playwright-merge-reports-run-1746375709
   namespace: playwright
   annotations:
     "argocd.argoproj.io/hook": PostSync
@@ -47,15 +47,15 @@ spec:
 
             echo "[Merge Job] Merging reports..."
 
-            npx playwright merge-reports /results/run-1746370926/*/ --reporter html
-            mkdir -p /results/run-1746370926/final
-            cp -r /results/run-1746370926/*/*.json /results/run-1746370926/final/
+            npx playwright merge-reports /results/run-1746375709/*/ --reporter html
+            mkdir -p /results/run-1746375709/final
+            cp -r /results/run-1746375709/*/*.json /results/run-1746375709/final/
             
             echo "[Merge Job] Merge complete."
 
         env:
         - name: RUN_ID
-          value: run-1746370926
+          value: run-1746375709
         - name: EXPECTED_SHARDS
           value: "3"  # Adjust this to match your test job parallelism/shard count
         volumeMounts:
