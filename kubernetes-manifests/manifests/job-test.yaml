@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: playwright-test-run-1746366766
+  name: playwright-test-run-1746370926
   namespace: playwright
   annotations:
     "argocd.argoproj.io/hook": PostSync
@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: playwright
-        image: saifb/playwright-test:0.0.3
+        image: saifb/playwright-test:0.0.4
         imagePullPolicy: IfNotPresent
         command: ["/bin/bash", "/config/entrypoint.sh"]
         env:
@@ -33,7 +33,7 @@ spec:
         - name: BASE_URL
           value: "https://playwright.dev"
         - name: RUN_ID
-          value: run-1746366766
+          value: run-1746370926
         volumeMounts:
         - name: local-results
           mountPath: /results
