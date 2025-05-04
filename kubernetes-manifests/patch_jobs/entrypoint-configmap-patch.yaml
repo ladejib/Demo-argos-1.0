@@ -3,6 +3,9 @@ kind: ConfigMap
 metadata:
   name: playwright-entrypoint
   namespace: playwright
+  annotations:
+    "argocd.argoproj.io/hook": PostSync
+    "argocd.argoproj.io/hook-delete-policy": HookSucceeded
 data:
   entrypoint.sh: |
     #!/bin/bash

@@ -3,6 +3,9 @@ kind: ConfigMap
 metadata:
   name: playwright-entrypoint
   namespace: playwright
+  annotations:
+    "argocd.argoproj.io/hook": PostSync
+    "argocd.argoproj.io/hook-delete-policy": HookSucceeded
 data:
   entrypoint.sh: |
     #!/bin/bash
@@ -29,9 +32,9 @@ data:
 
     npx playwright test --shard=${SHARD_CURRENT}/${TOTAL_SHARDS}
 
-    echo "[Entry Point] Writing to /results/run-1746392430/${SHARD_CURRENT}/"
-    mkdir -p /results/run-1746392430/${SHARD_CURRENT}
-    cp -r playwright-report/* /results/run-1746392430/${SHARD_CURRENT}/
+    echo "[Entry Point] Writing to /results/run-1746393591/${SHARD_CURRENT}/"
+    mkdir -p /results/run-1746393591/${SHARD_CURRENT}
+    cp -r playwright-report/* /results/run-1746393591/${SHARD_CURRENT}/
     echo "[Entry Point] Completed ..."
 
     sleep 120
