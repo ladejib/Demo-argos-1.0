@@ -44,7 +44,7 @@ spec:
               sleep $WAIT_INTERVAL
               WAITED=$((WAITED + WAIT_INTERVAL))
             done
-
+            sleep $MAX_WAIT 
             echo "[Merge Job] Merging reports..."
 
             npx playwright merge-reports --reporter html /results/__RUN_ID__/*/
