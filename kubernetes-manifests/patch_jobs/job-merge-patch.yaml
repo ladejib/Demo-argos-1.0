@@ -47,7 +47,7 @@ spec:
 
             echo "[Merge Job] Merging reports..."
 
-            npx playwright merge-reports /results/__RUN_ID__/*/ --reporter html
+            npx playwright merge-reports --reporter html /results/__RUN_ID__/*/
             mkdir -p /results/__RUN_ID__/final
             cp -r /results/__RUN_ID__/*/*.json /results/__RUN_ID__/final/
             
