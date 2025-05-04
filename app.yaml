@@ -7,17 +7,13 @@ metadata:
 spec:
   project: default
   source:
-    # repoURL: https://github.com/your-repo/kubernetes-manifests.git
-    repoURL: https://github.com/ladejib/my_todo_app.git
+    repoURL: https://github.com/ladejib/Demo-argos-1.0.git
     targetRevision: HEAD
     path: kubernetes-manifests/manifests
-    # For local testing, force image pull policy
-    helm:
-      parameters:
-        - name: image.pullPolicy
-          value: "Always"  # Always pull latest image
   destination:
     server: https://kubernetes.default.svc
-    namespace: default  # Use 'default' ns for simplicity in Docker Desktop
+    namespace: playwrite  # The namespace must exit
   syncPolicy:
-    automated: {}
+    automated:
+      prune: true         # Optional: delete resources no longer in git
+      selfHeal: true      # Optional: auto-correct drift
