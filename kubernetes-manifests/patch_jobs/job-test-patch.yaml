@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: playwright
-        image: saifb/playwright-test:0.0.3
+        image: saifb/playwright-test:0.0.4
         imagePullPolicy: IfNotPresent
         command: ["/bin/bash", "/config/entrypoint.sh"]
         env:

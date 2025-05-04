@@ -46,9 +46,11 @@ spec:
             done
 
             echo "[Merge Job] Merging reports..."
+
+            npx playwright merge-reports /results/__RUN_ID__/*/ --reporter html
             mkdir -p /results/__RUN_ID__/final
-            cp -r playwright-report/*.json /results/__RUN_ID__/final/
-            npx playwright merge-reports /results/__RUN_ID__/final/ --reporter html
+            cp -r /results/__RUN_ID__/*/*.json /results/__RUN_ID__/final/
+            
             echo "[Merge Job] Merge complete."
 
         env:
