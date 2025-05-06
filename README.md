@@ -59,4 +59,4 @@ Get the assigned port:
 
 kubectl get svc -n argocd
 
-Access it at https://localhost:<NodePort>.
+Access it at https://localhost:NodePort
